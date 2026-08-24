@@ -37,6 +37,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
               setCurrentRow(row.original)
               setOpen('view')
             }}
+            className='cursor-pointer'
           >
             View
             <DropdownMenuShortcut>
@@ -48,6 +49,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
               setCurrentRow(row.original)
               setOpen('edit')
             }}
+            className='cursor-pointer'
           >
             Edit
             <DropdownMenuShortcut>
@@ -60,7 +62,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
               setCurrentRow(row.original)
               setOpen('delete')
             }}
-            className='text-red-500!'
+            className='text-red-500! cursor-pointer'
             disabled={row.original.status === 'Inactive'}
           >
             {row.original.status === 'Inactive' ? 'Already Inactive' : 'Deactivate'}
