@@ -33,6 +33,8 @@ export function FleetAssetsTable({ data, totalRecords, search, navigate }: DataT
   const [sorting, setSorting] = useState<SortingState>([])
 
   const {
+    globalFilter,
+    onGlobalFilterChange,
     columnFilters,
     onColumnFiltersChange,
     pagination,
@@ -42,9 +44,8 @@ export function FleetAssetsTable({ data, totalRecords, search, navigate }: DataT
     search,
     navigate,
     pagination: { defaultPage: 1, defaultPageSize: 10 },
-    globalFilter: { enabled: false },
+    globalFilter: { enabled: true, key: 'search' },
     columnFilters: [
-      { columnId: 'search', searchKey: 'search', type: 'string' },
       { columnId: 'status', searchKey: 'status', type: 'array' },
       { columnId: 'brand', searchKey: 'brand', type: 'array' },
       { columnId: 'assetType', searchKey: 'assetType', type: 'array' },
@@ -61,6 +62,7 @@ export function FleetAssetsTable({ data, totalRecords, search, navigate }: DataT
       rowSelection,
       columnFilters,
       columnVisibility,
+      globalFilter,
     },
     manualPagination: true,
     manualFiltering: true,
@@ -68,6 +70,7 @@ export function FleetAssetsTable({ data, totalRecords, search, navigate }: DataT
     enableRowSelection: true,
     onPaginationChange,
     onColumnFiltersChange,
+    onGlobalFilterChange,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
@@ -88,7 +91,6 @@ export function FleetAssetsTable({ data, totalRecords, search, navigate }: DataT
       <DataTableToolbar
         table={table}
         searchPlaceholder='Search by code, name, brand...'
-        searchKey='search'
         filters={[
           {
             columnId: 'assetType',
