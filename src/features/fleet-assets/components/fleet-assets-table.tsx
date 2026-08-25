@@ -27,7 +27,12 @@ type DataTableProps = {
   navigate: NavigateFn
 }
 
-export function FleetAssetsTable({ data, totalRecords, search, navigate }: DataTableProps) {
+export function FleetAssetsTable({
+  data,
+  totalRecords,
+  search,
+  navigate,
+}: DataTableProps) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [sorting, setSorting] = useState<SortingState>([])
@@ -84,7 +89,7 @@ export function FleetAssetsTable({ data, totalRecords, search, navigate }: DataT
   return (
     <div
       className={cn(
-        'max-sm:has-[div[role="toolbar"]]:mb-16', 
+        'max-sm:has-[div[role="toolbar"]]:mb-16',
         'flex flex-1 flex-col gap-4'
       )}
     >

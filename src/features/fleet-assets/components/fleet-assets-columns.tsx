@@ -12,7 +12,9 @@ export const fleetAssetsColumns: ColumnDef<FleetAsset>[] = [
       <DataTableColumnHeader column={column} title='Asset Code' />
     ),
     cell: ({ row }) => (
-      <div className='w-fit text-nowrap font-medium'>{row.getValue('assetCode')}</div>
+      <div className='w-fit font-medium text-nowrap'>
+        {row.getValue('assetCode')}
+      </div>
     ),
   },
   {
@@ -58,9 +60,10 @@ export const fleetAssetsColumns: ColumnDef<FleetAsset>[] = [
     ),
     cell: ({ row }) => {
       const status = row.getValue('status') as string
-      const badgeColor = status === 'Active' 
-        ? 'bg-teal-100/30 text-teal-900 dark:text-teal-200 border-teal-200'
-        : 'bg-neutral-300/40 border-neutral-300 text-neutral-900 dark:text-neutral-200'
+      const badgeColor =
+        status === 'Active'
+          ? 'bg-teal-100/30 text-teal-900 dark:text-teal-200 border-teal-200'
+          : 'bg-neutral-300/40 border-neutral-300 text-neutral-900 dark:text-neutral-200'
 
       return (
         <div className='flex space-x-2'>
@@ -79,7 +82,17 @@ export const fleetAssetsColumns: ColumnDef<FleetAsset>[] = [
     ),
     cell: ({ row }) => {
       const date = new Date(row.getValue('createdAt'))
-      return <div className='w-fit text-nowrap'>{date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).replace(/ /g, '-')}</div>
+      return (
+        <div className='w-fit text-nowrap'>
+          {date
+            .toLocaleDateString('en-GB', {
+              day: '2-digit',
+              month: 'short',
+              year: 'numeric',
+            })
+            .replace(/ /g, '-')}
+        </div>
+      )
     },
   },
   {

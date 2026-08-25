@@ -4,8 +4,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { type FleetAsset } from '../data/schema'
 import { Separator } from '@/components/ui/separator'
+import { type FleetAsset } from '../data/schema'
 
 type FleetAssetViewDialogProps = {
   open: boolean
@@ -26,11 +26,13 @@ export function FleetAssetsViewDialog({
           <div className='text-sm text-muted-foreground'>
             <span className='font-bold'>{currentRow.assetCode}</span>
             {currentRow.tyreSpecifications?.tyreSize && (
-              <span className='ml-2'>{currentRow.tyreSpecifications.tyreSize}</span>
+              <span className='ml-2'>
+                {currentRow.tyreSpecifications.tyreSize}
+              </span>
             )}
           </div>
         </DialogHeader>
-        
+
         <Separator className='my-2' />
 
         <div className='space-y-6'>
@@ -40,17 +42,21 @@ export function FleetAssetsViewDialog({
             </h4>
             <div className='grid grid-cols-3 gap-2 text-sm'>
               <div className='text-muted-foreground'>Asset Code</div>
-              <div className='col-span-2 font-medium'>{currentRow.assetCode}</div>
-              
+              <div className='col-span-2 font-medium'>
+                {currentRow.assetCode}
+              </div>
+
               <div className='text-muted-foreground'>Asset Type</div>
-              <div className='col-span-2 font-medium'>{currentRow.assetType}</div>
-              
+              <div className='col-span-2 font-medium'>
+                {currentRow.assetType}
+              </div>
+
               <div className='text-muted-foreground'>Brand</div>
               <div className='col-span-2 font-medium'>{currentRow.brand}</div>
-              
+
               <div className='text-muted-foreground'>Model</div>
               <div className='col-span-2 font-medium'>{currentRow.model}</div>
-              
+
               <div className='text-muted-foreground'>Status</div>
               <div className='col-span-2 font-medium'>{currentRow.status}</div>
             </div>
@@ -63,25 +69,39 @@ export function FleetAssetsViewDialog({
               </h4>
               <div className='grid grid-cols-3 gap-2 text-sm'>
                 <div className='text-muted-foreground'>Tyre Size</div>
-                <div className='col-span-2 font-medium'>{currentRow.tyreSpecifications.tyreSize}</div>
-                
+                <div className='col-span-2 font-medium'>
+                  {currentRow.tyreSpecifications.tyreSize}
+                </div>
+
                 <div className='text-muted-foreground'>Construction</div>
-                <div className='col-span-2 font-medium'>{currentRow.tyreSpecifications.construction}</div>
-                
+                <div className='col-span-2 font-medium'>
+                  {currentRow.tyreSpecifications.construction}
+                </div>
+
                 <div className='text-muted-foreground'>Pattern</div>
-                <div className='col-span-2 font-medium'>{currentRow.tyreSpecifications.pattern || '-'}</div>
-                
+                <div className='col-span-2 font-medium'>
+                  {currentRow.tyreSpecifications.pattern || '-'}
+                </div>
+
                 <div className='text-muted-foreground'>Load Index</div>
-                <div className='col-span-2 font-medium'>{currentRow.tyreSpecifications.loadIndex || '-'}</div>
-                
+                <div className='col-span-2 font-medium'>
+                  {currentRow.tyreSpecifications.loadIndex || '-'}
+                </div>
+
                 <div className='text-muted-foreground'>Speed Rating</div>
-                <div className='col-span-2 font-medium'>{currentRow.tyreSpecifications.speedRating || '-'}</div>
-                
+                <div className='col-span-2 font-medium'>
+                  {currentRow.tyreSpecifications.speedRating || '-'}
+                </div>
+
                 <div className='text-muted-foreground'>Ply Rating</div>
-                <div className='col-span-2 font-medium'>{currentRow.tyreSpecifications.plyRating || '-'}</div>
-                
+                <div className='col-span-2 font-medium'>
+                  {currentRow.tyreSpecifications.plyRating || '-'}
+                </div>
+
                 <div className='text-muted-foreground'>Tube Type</div>
-                <div className='col-span-2 font-medium'>{currentRow.tyreSpecifications.tubeType}</div>
+                <div className='col-span-2 font-medium'>
+                  {currentRow.tyreSpecifications.tubeType}
+                </div>
               </div>
             </div>
           )}

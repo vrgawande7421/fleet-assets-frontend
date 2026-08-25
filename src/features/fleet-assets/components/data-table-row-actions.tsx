@@ -62,10 +62,12 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
               setCurrentRow(row.original)
               setOpen('delete')
             }}
-            className='text-red-500! cursor-pointer'
+            className='cursor-pointer text-red-500!'
             disabled={row.original.status === 'Inactive'}
           >
-            {row.original.status === 'Inactive' ? 'Already Inactive' : 'Deactivate'}
+            {row.original.status === 'Inactive'
+              ? 'Already Inactive'
+              : 'Deactivate'}
             <DropdownMenuShortcut>
               <Trash2 size={16} />
             </DropdownMenuShortcut>

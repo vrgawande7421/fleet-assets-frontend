@@ -2,13 +2,13 @@
 
 import { useState } from 'react'
 import { AlertTriangle } from 'lucide-react'
+import { toast } from 'sonner'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ConfirmDialog } from '@/components/confirm-dialog'
-import { type FleetAsset } from '../data/schema'
 import api from '../../../services/api'
-import { toast } from 'sonner'
+import { type FleetAsset } from '../data/schema'
 
 type FleetAssetDeleteDialogProps = {
   open: boolean

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getRouteApi } from '@tanstack/react-router'
+import api from '@/services/api'
+import { toast } from 'sonner'
 import { ConfigDrawer } from '@/components/config-drawer'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
@@ -11,8 +13,6 @@ import { FleetAssetsPrimaryButtons } from './components/fleet-assets-primary-but
 import { FleetAssetsProvider } from './components/fleet-assets-provider'
 import { FleetAssetsTable } from './components/fleet-assets-table'
 import { type FleetAsset } from './data/schema'
-import api from '@/services/api'
-import { toast } from 'sonner'
 
 const route = getRouteApi('/_authenticated/fleet-assets/')
 
@@ -30,16 +30,35 @@ export function FleetAssets() {
 
         // Map table url state to backend API format
         if (search?.page) queryParams.append('page', String(search.page))
-        if (search?.pageSize) queryParams.append('limit', String(search.pageSize))
+        if (search?.pageSize)
+          queryParams.append('limit', String(search.pageSize))
 
         // Search param mapping
         if (search.search) queryParams.append('search', String(search.search))
 
         // Filter mapping - Handle array or string
-        if (search.status) queryParams.append('status', Array.isArray(search.status) ? search.status[0] : search.status)
-        if (search.brand) queryParams.append('brand', Array.isArray(search.brand) ? search.brand[0] : search.brand)
-        // @ts-expect-error: assetType is not defined in the route search schema
-        if (search.assetType) queryParams.append('assetType', Array.isArray(search.assetType) ? search.assetType[0] : search.assetType)
+        if (search.status)
+          queryParams.append(
+            'status',
+            Array.isArray(search.status) ? search.status[0] : search.status
+          )
+        if (search.brand)
+          queryParams.append(
+            'brand',
+            Array.isArray(search.brand) ? search.brand[0] : search.brand
+          )
+        const searchParams = search as Record<
+          string,
+          string | string[] | undefined
+        >
+        if (searchParams.assetType) {
+          queryParams.append(
+            'assetType',
+            Array.isArray(searchParams.assetType)
+              ? searchParams.assetType[0]
+              : searchParams.assetType
+          )
+        }
 
         // Sorting mapping
         if (search.sort) {
@@ -78,14 +97,21 @@ export function FleetAssets() {
       <Main className='flex flex-1 flex-col gap-4 sm:gap-6'>
         <div className='flex flex-wrap items-end justify-between gap-2'>
           <div>
-            <h2 className='text-2xl font-bold tracking-tight'>Fleet Asset Master</h2>
+            <h2 className='text-2xl font-bold tracking-tight'>
+              Fleet Asset Master
+            </h2>
             <p className='text-muted-foreground'>
               Manage your fleet assets and their specifications here.
             </p>
           </div>
           <FleetAssetsPrimaryButtons />
         </div>
-        <FleetAssetsTable data={data} totalRecords={totalRecords} search={search} navigate={navigate} />
+        <FleetAssetsTable
+          data={data}
+          totalRecords={totalRecords}
+          search={search}
+          navigate={navigate}
+        />
       </Main>
 
       <FleetAssetsDialogs />

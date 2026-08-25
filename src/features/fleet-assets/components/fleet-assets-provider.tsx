@@ -11,9 +11,15 @@ type FleetAssetsContextType = {
   setCurrentRow: React.Dispatch<React.SetStateAction<FleetAsset | null>>
 }
 
-const FleetAssetsContext = React.createContext<FleetAssetsContextType | null>(null)
+const FleetAssetsContext = React.createContext<FleetAssetsContextType | null>(
+  null
+)
 
-export function FleetAssetsProvider({ children }: { children: React.ReactNode }) {
+export function FleetAssetsProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   const [open, setOpen] = useDialogState<FleetAssetsDialogType>(null)
   const [currentRow, setCurrentRow] = useState<FleetAsset | null>(null)
 

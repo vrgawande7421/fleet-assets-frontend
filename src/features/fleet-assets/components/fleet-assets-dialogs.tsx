@@ -1,7 +1,7 @@
 import { FleetAssetsActionDialog } from './fleet-assets-action-dialog'
 import { FleetAssetsDeleteDialog } from './fleet-assets-delete-dialog'
-import { FleetAssetsViewDialog } from './fleet-assets-view-dialog'
 import { useFleetAssets } from './fleet-assets-provider'
+import { FleetAssetsViewDialog } from './fleet-assets-view-dialog'
 
 export function FleetAssetsDialogs() {
   const { open, setOpen, currentRow, setCurrentRow } = useFleetAssets()

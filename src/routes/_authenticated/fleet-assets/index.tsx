@@ -7,12 +7,7 @@ const fleetAssetsSearchSchema = z.object({
   pageSize: z.number().optional().catch(10),
   // Facet filters
   status: z
-    .array(
-      z.union([
-        z.literal('Active'),
-        z.literal('Inactive'),
-      ])
-    )
+    .array(z.union([z.literal('Active'), z.literal('Inactive')]))
     .optional()
     .catch([]),
   brand: z

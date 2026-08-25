@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
+import type { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -21,13 +23,11 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { SelectDropdown } from '@/components/select-dropdown'
-import { fleetAssetSchema, type FleetAsset } from '../data/schema'
-import type { z } from 'zod'
 import api from '../../../services/api'
-import { toast } from 'sonner'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { fleetAssetSchema, type FleetAsset } from '../data/schema'
 
 type FleetAssetForm = z.infer<typeof fleetAssetSchema>
 
@@ -47,33 +47,33 @@ export function FleetAssetsActionDialog({
     resolver: zodResolver(fleetAssetSchema as any),
     defaultValues: isEdit
       ? {
-        assetCode: currentRow.assetCode,
-        assetName: currentRow.assetName,
-        assetType: currentRow.assetType,
-        brand: currentRow.brand,
-        model: currentRow.model,
-        status: currentRow.status,
-        description: currentRow.description || '',
-        tyreSpecifications: currentRow.tyreSpecifications,
-      }
+          assetCode: currentRow.assetCode,
+          assetName: currentRow.assetName,
+          assetType: currentRow.assetType,
+          brand: currentRow.brand,
+          model: currentRow.model,
+          status: currentRow.status,
+          description: currentRow.description || '',
+          tyreSpecifications: currentRow.tyreSpecifications,
+        }
       : {
-        assetCode: '',
-        assetName: '',
-        assetType: 'Tyre',
-        brand: '',
-        model: '',
-        status: 'Active',
-        description: '',
-        tyreSpecifications: {
-          tyreSize: '',
-          construction: 'Radial',
-          pattern: '',
-          loadIndex: '',
-          speedRating: '',
-          plyRating: '',
-          tubeType: 'Tubeless',
+          assetCode: '',
+          assetName: '',
+          assetType: 'Tyre',
+          brand: '',
+          model: '',
+          status: 'Active',
+          description: '',
+          tyreSpecifications: {
+            tyreSize: '',
+            construction: 'Radial',
+            pattern: '',
+            loadIndex: '',
+            speedRating: '',
+            plyRating: '',
+            tubeType: 'Tubeless',
+          },
         },
-      },
   })
 
   const assetType = form.watch('assetType')
@@ -128,9 +128,15 @@ export function FleetAssetsActionDialog({
                   name='assetCode'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Asset Code <span className="text-destructive">*</span></FormLabel>
+                      <FormLabel>
+                        Asset Code <span className='text-destructive'>*</span>
+                      </FormLabel>
                       <FormControl>
-                        <Input placeholder='e.g., TYR-001' {...field} disabled={isEdit} />
+                        <Input
+                          placeholder='e.g., TYR-001'
+                          {...field}
+                          disabled={isEdit}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -141,7 +147,9 @@ export function FleetAssetsActionDialog({
                   name='assetName'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Asset Name <span className="text-destructive">*</span></FormLabel>
+                      <FormLabel>
+                        Asset Name <span className='text-destructive'>*</span>
+                      </FormLabel>
                       <FormControl>
                         <Input placeholder='e.g., 295/80 R22.5' {...field} />
                       </FormControl>
@@ -154,7 +162,9 @@ export function FleetAssetsActionDialog({
                   name='assetType'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Asset Type <span className="text-destructive">*</span></FormLabel>
+                      <FormLabel>
+                        Asset Type <span className='text-destructive'>*</span>
+                      </FormLabel>
                       <SelectDropdown
                         defaultValue={field.value}
                         onValueChange={field.onChange}
@@ -173,7 +183,9 @@ export function FleetAssetsActionDialog({
                   name='brand'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Brand <span className="text-destructive">*</span></FormLabel>
+                      <FormLabel>
+                        Brand <span className='text-destructive'>*</span>
+                      </FormLabel>
                       <FormControl>
                         <Input placeholder='e.g., MRF' {...field} />
                       </FormControl>
@@ -186,7 +198,9 @@ export function FleetAssetsActionDialog({
                   name='model'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Model <span className="text-destructive">*</span></FormLabel>
+                      <FormLabel>
+                        Model <span className='text-destructive'>*</span>
+                      </FormLabel>
                       <FormControl>
                         <Input placeholder='e.g., Steel Muscle' {...field} />
                       </FormControl>
@@ -199,7 +213,9 @@ export function FleetAssetsActionDialog({
                   name='status'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Status <span className="text-destructive">*</span></FormLabel>
+                      <FormLabel>
+                        Status <span className='text-destructive'>*</span>
+                      </FormLabel>
                       <SelectDropdown
                         defaultValue={field.value}
                         onValueChange={field.onChange}
@@ -231,16 +247,24 @@ export function FleetAssetsActionDialog({
 
               {assetType === 'Tyre' && (
                 <div className='mt-6 space-y-4 rounded-md border p-4'>
-                  <h4 className='font-medium text-sm text-muted-foreground uppercase'>Tyre Specifications</h4>
+                  <h4 className='text-sm font-medium text-muted-foreground uppercase'>
+                    Tyre Specifications
+                  </h4>
                   <div className='grid grid-cols-2 gap-4'>
                     <FormField
                       control={form.control as any}
                       name='tyreSpecifications.tyreSize'
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Tyre Size <span className="text-destructive">*</span></FormLabel>
+                          <FormLabel>
+                            Tyre Size{' '}
+                            <span className='text-destructive'>*</span>
+                          </FormLabel>
                           <FormControl>
-                            <Input placeholder='e.g., 295/80 R22.5' {...field} />
+                            <Input
+                              placeholder='e.g., 295/80 R22.5'
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -251,7 +275,10 @@ export function FleetAssetsActionDialog({
                       name='tyreSpecifications.construction'
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Construction <span className="text-destructive">*</span></FormLabel>
+                          <FormLabel>
+                            Construction{' '}
+                            <span className='text-destructive'>*</span>
+                          </FormLabel>
                           <SelectDropdown
                             defaultValue={field.value}
                             onValueChange={field.onChange}
@@ -272,7 +299,10 @@ export function FleetAssetsActionDialog({
                         <FormItem>
                           <FormLabel>Pattern</FormLabel>
                           <FormControl>
-                            <Input placeholder='e.g., Steel Muscle' {...field} />
+                            <Input
+                              placeholder='e.g., Steel Muscle'
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -322,7 +352,10 @@ export function FleetAssetsActionDialog({
                       name='tyreSpecifications.tubeType'
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Tube Type <span className="text-destructive">*</span></FormLabel>
+                          <FormLabel>
+                            Tube Type{' '}
+                            <span className='text-destructive'>*</span>
+                          </FormLabel>
                           <SelectDropdown
                             defaultValue={field.value}
                             onValueChange={field.onChange}
