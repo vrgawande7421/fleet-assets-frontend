@@ -134,7 +134,6 @@ export function FleetAssetsTable({ data, totalRecords, search, navigate }: DataT
                       className={cn(
                         'bg-background group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
                         header.column.columnDef.meta?.className,
-                        // @ts-ignore
                         header.column.columnDef.meta?.thClassName
                       )}
                     >
@@ -164,7 +163,6 @@ export function FleetAssetsTable({ data, totalRecords, search, navigate }: DataT
                       className={cn(
                         'bg-background group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
                         cell.column.columnDef.meta?.className,
-                        // @ts-ignore
                         cell.column.columnDef.meta?.tdClassName
                       )}
                     >

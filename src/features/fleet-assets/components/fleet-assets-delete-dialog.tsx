@@ -31,7 +31,7 @@ export function FleetAssetsDeleteDialog({
       toast.success('Asset deactivated successfully')
       onOpenChange(false)
       window.dispatchEvent(new Event('refresh-assets'))
-    } catch (error) {
+    } catch (_error) {
       toast.error('Failed to deactivate asset')
     }
   }

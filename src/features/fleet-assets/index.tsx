@@ -33,15 +33,12 @@ export function FleetAssets() {
         if (search?.pageSize) queryParams.append('limit', String(search.pageSize))
 
         // Search param mapping
-        // @ts-ignore
         if (search.search) queryParams.append('search', String(search.search))
 
         // Filter mapping - Handle array or string
-        // @ts-ignore
         if (search.status) queryParams.append('status', Array.isArray(search.status) ? search.status[0] : search.status)
-        // @ts-ignore
         if (search.brand) queryParams.append('brand', Array.isArray(search.brand) ? search.brand[0] : search.brand)
-        // @ts-ignore
+        // @ts-expect-error: assetType is not defined in the route search schema
         if (search.assetType) queryParams.append('assetType', Array.isArray(search.assetType) ? search.assetType[0] : search.assetType)
 
         // Sorting mapping
@@ -57,7 +54,7 @@ export function FleetAssets() {
           setData(res.data.data)
           setTotalRecords(res.data.totalRecords)
         }
-      } catch (error) {
+      } catch (_error) {
         toast.error('Failed to fetch fleet assets')
       }
     }
